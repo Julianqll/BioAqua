@@ -5,6 +5,7 @@ import { theme } from "./theme";
 import { BrowserRouter, Routes, Route } from 'react-router-dom';
 import { Notifications } from '@mantine/notifications';
 import { HomePage } from "./pages/HomePage";
+import { LoginPage } from "./pages/LoginPage";
 
 function App() {
   return (
@@ -13,6 +14,7 @@ function App() {
         <Notifications />
         <Routes>
           <Route path="/" element={<HomePage/>}/>
+          <Route path="/login" element={<LoginPage/>}/>
         </Routes>
       </MantineProvider>
     </BrowserRouter>
