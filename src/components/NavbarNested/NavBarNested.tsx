@@ -15,18 +15,16 @@ import { LinksGroup } from '../NavbarLinksGroup/NavbarLinksGroup';
 const mockdata = [
   { label: 'Dashboard', icon: IconGauge },
   {
-    label: 'Market news',
+    label: 'Análisis',
     icon: IconNotes,
     initiallyOpened: true,
     links: [
-      { label: 'Overview', link: '/' },
-      { label: 'Forecasts', link: '/' },
-      { label: 'Outlook', link: '/' },
-      { label: 'Real time', link: '/' },
+      { label: 'Toma de muestra', link: '/dashboard/samples' },
+      { label: 'Identificación de genes', link: '/' },
     ],
   },
   {
-    label: 'Releases',
+    label: 'Evaluación',
     icon: IconCalendarStats,
     links: [
       { label: 'Upcoming releases', link: '/' },
@@ -34,11 +32,8 @@ const mockdata = [
       { label: 'Releases schedule', link: '/' },
     ],
   },
-  { label: 'Analytics', icon: IconPresentationAnalytics },
-  { label: 'Contracts', icon: IconFileAnalytics },
-  { label: 'Settings', icon: IconAdjustments },
   {
-    label: 'Security',
+    label: 'Visualización',
     icon: IconLock,
     links: [
       { label: 'Enable 2FA', link: '/' },
