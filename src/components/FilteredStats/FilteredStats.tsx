@@ -1,3 +1,4 @@
+import { useEffect, useState } from 'react';
 import {
   Card,
   Title,
@@ -5,49 +6,48 @@ import {
   Container,
 } from '@mantine/core';
 import { BarChart, ScatterChart } from '@mantine/charts';
+import axios from 'axios';
 
 export function FilteredStats() {
-  const lecturasData = [
-    { label: 'Total', lecturas: 150000 },
-    { label: 'Filtradas', lecturas: 124000 },
-  ];
+  const [lecturasData, setLecturasData] = useState<{ label: string; lecturas: number }[]>([]);
+  const [longitudesData, setLongitudesData] = useState<{ rango: string; cantidad: number }[]>([]);
+  const [qscoreScatterData, setQscoreScatterData] = useState<
+    { name: string; color: string; data: { muestra: number; calidad: number }[] }[]
+  >([]);
 
-  const longitudesData = [
-    { rango: '50-100', cantidad: 2000 },
-    { rango: '101-150', cantidad: 45000 },
-    { rango: '151-200', cantidad: 50000 },
-    { rango: '201-250', cantidad: 22000 },
-    { rango: '251-300', cantidad: 5000 },
-  ];
+  useEffect(() => {
+    const fetchData = async () => {
+      try {
+        const idMuestra = 1;
+        const token = localStorage.getItem("token");
 
-  const qscoreScatterData = [
-    {
-      name: 'Grupo A',
-      color: 'blue.5',
-      data: [
-        { muestra: 1, calidad: 18 },
-        { muestra: 2, calidad: 22 },
-        { muestra: 3, calidad: 30 },
-        { muestra: 4, calidad: 35 },
-        { muestra: 5, calidad: 40 },
-        { muestra: 6, calidad: 25 },
-        { muestra: 7, calidad: 37 },
-      ],
-    },
-    {
-      name: 'Grupo B',
-      color: 'green.5',
-      data: [
-        { muestra: 1, calidad: 20 },
-        { muestra: 2, calidad: 28 },
-        { muestra: 3, calidad: 32 },
-        { muestra: 4, calidad: 38 },
-        { muestra: 5, calidad: 42 },
-        { muestra: 6, calidad: 26 },
-        { muestra: 7, calidad: 34 },
-      ],
-    },
-  ];
+        const response = await axios.post(
+          `http://127.0.0.1:8000/api/muestras/${idMuestra}/analizar/`,
+          {},
+          {
+            headers: {
+              Authorization: `Token ${token}`,
+            },
+          }
+        );
+
+        const data = response.data as {
+          lecturasData: { label: string; lecturas: number }[];
+          longitudesData: { rango: string; cantidad: number }[];
+          qscoreScatterData: { name: string; color: string; data: { muestra: number; calidad: number }[] }[];
+        };
+
+        setLecturasData(data.lecturasData);
+        setLongitudesData(data.longitudesData);
+        setQscoreScatterData(data.qscoreScatterData);
+
+      } catch (error) {
+        console.error('Error al obtener datos de análisis:', error);
+      }
+    };
+
+    fetchData();
+  }, []);
 
   return (
     <Container size="lg" mt="xl">
