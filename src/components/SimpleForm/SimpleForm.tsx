@@ -41,24 +41,51 @@ export function SimpleForm() {
     },
   });
 
-  const handleSubmit = (values: typeof form.values) => {
-    setModalOpened(true);
-    setLoading(true);
-    setStep(1); // Analizando...
+const handleSubmit = async (values: typeof form.values) => {
+  setModalOpened(true);
+  setLoading(true);
+  setStep(1); // Analizando...
 
-    // Paso 1: "Analizando en la plataforma..."
-    setTimeout(() => {
-      setStep(2); // Filtrando...
-    }, 3000);
+  // Simular proceso de análisis
+  setTimeout(() => setStep(2), 3000); // Filtrando...
+  setTimeout(() => setLoading(false), 6000);
 
-    // Paso 2: "Filtrando secuencias..."
-    setTimeout(() => {
-      setLoading(false);
-      setModalOpened(false);
-      // Aquí podrías redirigir o mostrar una notificación
-      console.log('Proceso finalizado', values);
-    }, 6000);
-  };
+  // 🔐 Token (guárdalo antes en localStorage o context)
+  const token = localStorage.getItem('token'); // o de un contexto
+
+  // 🔁 Construir FormData
+  const formData = new FormData();
+  formData.append('ubicacion', values.location);
+  const fechaRecoleccion = new Date(values.date!).toISOString().split('T')[0];
+  formData.append('fecha_recoleccion', fechaRecoleccion);
+
+  formData.append('rio_fuente', values.river);
+  formData.append('comunidad', values.community);
+  if (values.photo) formData.append('foto', values.photo);
+  formData.append('archivo_fastq', values.fastqFile!);
+
+  try {
+    const response = await fetch('http://localhost:8000/api/muestras/', {
+      method: 'POST',
+      headers: {
+        Authorization: `Token ${token}`,
+      },
+      body: formData,
+    });
+
+    if (response.ok) {
+      console.log('✅ Muestra enviada con éxito');
+    } else {
+      const error = await response.json();
+      console.error('❌ Error al enviar:', error);
+    }
+  } catch (err) {
+    console.error('❌ Error de red:', err);
+  } finally {
+    setModalOpened(false);
+  }
+};
+
 
   return (
     <>

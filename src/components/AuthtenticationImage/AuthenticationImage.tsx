@@ -38,8 +38,8 @@ export function AuthenticationImage() {
       }
 
       // Guardar token y usuario en localStorage
-      localStorage.setItem('token', data.access_token);
-      localStorage.setItem('user', JSON.stringify(data.user));
+      localStorage.setItem('token', data.token);
+      localStorage.setItem('user', JSON.stringify(data.username));
 
       // Redirigir a dashboard (o setear auth context)
       window.location.href = '/dashboard';
