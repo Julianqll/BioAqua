@@ -9,18 +9,18 @@ export function HeroImageBackground() {
 
       <div className={classes.inner}>
         <Title className={classes.title}>
-          Plantilla Inicial con Mantine
+          BioAqua
         </Title>
 
         <Container size={640}>
           <Text size="lg" className={classes.description}>
-            Este es un ejemplo inicial de la distribución de carpetas y archivos
+            BioAqua es una plataforma diseñada para facilitar el análisis y visualización de datos ambientales y biológicos, enfocándose en la calidad del agua y su impacto en los ecosistemas.
           </Text>
         </Container>
 
         <div className={classes.controls}>
-          <Button component={Link} to="/" className={classes.control} variant="white" size="lg">
-            Botón
+          <Button component={Link} to="/login" className={classes.control} variant="white" size="lg">
+            Iniciar sesión
           </Button>
         </div>
       </div>
