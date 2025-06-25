@@ -7,8 +7,12 @@ import {
 } from '@mantine/core';
 import { BarChart, ScatterChart } from '@mantine/charts';
 import axios from 'axios';
+import { useParams } from 'react-router-dom'; // 👈 importante
+
 
 export function FilteredStats() {
+  const { id } = useParams(); // 👈 esto recupera el id de /dashboard/filtered/:id
+
   const [lecturasData, setLecturasData] = useState<{ label: string; lecturas: number }[]>([]);
   const [longitudesData, setLongitudesData] = useState<{ rango: string; cantidad: number }[]>([]);
   const [qscoreScatterData, setQscoreScatterData] = useState<
@@ -18,11 +22,10 @@ export function FilteredStats() {
   useEffect(() => {
     const fetchData = async () => {
       try {
-        const idMuestra = 1;
         const token = localStorage.getItem("token");
 
         const response = await axios.post(
-          `http://127.0.0.1:8000/api/muestras/${idMuestra}/analizar/`,
+          `http://127.0.0.1:8000/api/muestras/${id}/analizar/`, // 👈 usa el id desde la URL
           {},
           {
             headers: {
@@ -46,8 +49,8 @@ export function FilteredStats() {
       }
     };
 
-    fetchData();
-  }, []);
+    if (id) fetchData();
+  }, [id]);
 
   return (
     <Container size="lg" mt="xl">

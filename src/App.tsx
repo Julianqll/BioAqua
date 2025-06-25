@@ -14,6 +14,7 @@ import { FilteredPage } from "./pages/FilteredPage";
 import Fase3Dashboard from "./pages/Fase3Dashboard";
 import Fase4Riesgo from "./pages/Fase4Riesgo";
 import DashboardAdmin from "./pages/MainDashboard";
+import FilteredTable from "./pages/FilteredTable";
 
 function App() {
   return (
@@ -26,7 +27,8 @@ function App() {
           <Route path="/dashboard" element={<DashboardLayout />}>
             <Route path="" element={<DashboardAdmin />} />
             <Route path="samples" element={<SamplesPage />} />
-            <Route path="filtered" element={<FilteredPage/>} />
+            <Route path="filtered" element={<FilteredTable/>} />
+            <Route path="/dashboard/filtered/:id" element={<FilteredPage />} />
             <Route path="fase3" element={<Fase3Dashboard/>} />
             <Route path="fase4" element={<Fase4Riesgo/>} />
           </Route>
