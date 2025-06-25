@@ -13,33 +13,25 @@ import classes from './NavbarNested.module.css';
 import { LinksGroup } from '../NavbarLinksGroup/NavbarLinksGroup';
 
 const mockdata = [
-  { label: 'Dashboard', icon: IconGauge },
+  { label: 'Dashboard', icon: IconGauge, link: '/dashboard' },
   {
     label: 'Análisis',
     icon: IconNotes,
     initiallyOpened: true,
     links: [
       { label: 'Toma de muestra', link: '/dashboard/samples' },
-      { label: 'Identificación de genes', link: '/' },
+      { label: 'Identificación de genes', link: '/dashboard/filtered' },
     ],
   },
   {
     label: 'Evaluación',
     icon: IconCalendarStats,
-    links: [
-      { label: 'Upcoming releases', link: '/' },
-      { label: 'Previous releases', link: '/' },
-      { label: 'Releases schedule', link: '/' },
-    ],
+    link: '/dashboard/fase3',
   },
   {
     label: 'Visualización',
     icon: IconLock,
-    links: [
-      { label: 'Enable 2FA', link: '/' },
-      { label: 'Change password', link: '/' },
-      { label: 'Recovery codes', link: '/' },
-    ],
+    link: '/dashboard/fase4',
   },
 ];
 
