@@ -41,7 +41,7 @@ export default function DashboardLayout() {
           <div >
             <Group justify="space-between">
               <Text style={{ width: 50 }}>BioAqua</Text>
-              <Code fw={700}>v3.1.2</Code>
+              <Code fw={700}>v1.0.0</Code>
             </Group>
           </div>
         </Group>
