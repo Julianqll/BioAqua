@@ -13,6 +13,7 @@ import { SamplesPage } from "./pages/SamplesPage";
 import { FilteredPage } from "./pages/FilteredPage";
 import Fase3Dashboard from "./pages/Fase3Dashboard";
 import Fase4Riesgo from "./pages/Fase4Riesgo";
+import DashboardAdmin from "./pages/MainDashboard";
 
 function App() {
   return (
@@ -23,6 +24,7 @@ function App() {
           <Route path="/" element={<HomePage/>}/>
           <Route path="/login" element={<LoginPage/>}/>
           <Route path="/dashboard" element={<DashboardLayout />}>
+            <Route path="" element={<DashboardAdmin />} />
             <Route path="samples" element={<SamplesPage />} />
             <Route path="filtered" element={<FilteredPage/>} />
             <Route path="fase3" element={<Fase3Dashboard/>} />
