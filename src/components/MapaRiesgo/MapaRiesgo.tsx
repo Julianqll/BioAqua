@@ -10,7 +10,7 @@ const colorPorNivel = {
 
 const iconoPorNivel = (nivel: 'Bajo' | 'Moderado' | 'Alto') =>
   new Icon({
-    iconUrl: `https://chart.googleapis.com/chart?chst=d_map_pin_letter&chld=%E2%80%A2|${colorPorNivel[nivel]}`,
+    iconUrl: `https://raw.githubusercontent.com/pointhi/leaflet-color-markers/master/img/marker-icon-${colorPorNivel[nivel]}.png`,
     iconSize: [30, 50],
     iconAnchor: [15, 50],
     popupAnchor: [0, -40],
