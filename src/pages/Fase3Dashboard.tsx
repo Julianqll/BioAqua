@@ -30,7 +30,11 @@ export default function Fase3Dashboard() {
           }
         );
 
-        const data = response.data;
+        const data = response.data as {
+          blastData?: any[];
+          heatmapData?: any[];
+          snpData?: any[];
+        };
         setBlastData(data.blastData || []);
         setHeatmapData(data.heatmapData || []);
         setSnpData(data.snpData || []);
@@ -65,8 +69,8 @@ export default function Fase3Dashboard() {
         <BlastResultsTable data={blastData} />
         <HeatmapGenesPorMuestraCanvas data={heatmapData} />
         <TablaVCF snps={snpData} />
-        <JBrowseViewer />
-      </Stack>
+        {id !== undefined && <JBrowseViewer sampleId={Number(id)} />}
+       </Stack>
     </Container>
   );
 }

@@ -5,7 +5,11 @@ import {
 } from '@jbrowse/react-linear-genome-view';
 import { useEffect, useState } from 'react';
 
-export function JBrowseViewer() {
+interface JBrowseViewerProps {
+  sampleId: number;
+}
+
+export function JBrowseViewer({ sampleId }: JBrowseViewerProps) {
   const [viewState, setViewState] = useState<any>(null);
 
   useEffect(() => {
@@ -18,13 +22,13 @@ export function JBrowseViewer() {
           adapter: {
             type: 'BgzipFastaAdapter',
             fastaLocation: {
-              uri: '/data/genome.fa.gz',
+              uri: `/static/data/genome_${sampleId}.fa.gz`,
             },
             faiLocation: {
-              uri: '/data/genome.fa.gz.fai',
+              uri: `/static/data/genome_${sampleId}.fa.gz.fai`,
             },
             gziLocation: {
-              uri: '/data/genome.fa.gz.gzi',
+              uri: `/static/data/genome_${sampleId}.fa.gz.gzi`,
             },
           },
         },
@@ -32,17 +36,17 @@ export function JBrowseViewer() {
       tracks: [
         {
           type: 'VariantTrack',
-          trackId: 'vcf',
+          trackId: `vcf_${sampleId}`,
           name: 'Mutaciones detectadas',
           assemblyNames: ['GRCh38'],
           adapter: {
             type: 'VcfTabixAdapter',
             vcfGzLocation: {
-              uri: '/data/mutaciones.vcf.gz',
+              uri: `/static/data/mutaciones_${sampleId}.vcf.gz`,
             },
             index: {
               location: {
-                uri: '/data/mutaciones.vcf.gz.tbi',
+                uri: `/static/data/mutaciones_${sampleId}.vcf.gz.tbi`,
               },
             },
           },
@@ -59,7 +63,7 @@ export function JBrowseViewer() {
     });
 
     setViewState(state);
-  }, []);
+  }, [sampleId]);
 
   if (!viewState) return <p>Cargando visualizador...</p>;
 
